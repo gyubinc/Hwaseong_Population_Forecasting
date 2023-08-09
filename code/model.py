@@ -17,5 +17,5 @@ class LSTM(nn.Module):
 
         out, _ = self.lstm(x, (h0, c0))
         out = self.fc(out[:, -1, :])
-
+        
         return out
