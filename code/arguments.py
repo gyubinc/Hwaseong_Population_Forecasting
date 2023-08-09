@@ -4,12 +4,12 @@ def get_args():
     # 기본 설정값만 남기고, hyperparameter는 wandb에게 맡김.
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_name', default='LSTM', type=str)
-    parser.add_argument('--learning_rate', default=1e-1, type=float)
+    parser.add_argument('--learning_rate', default=1, type=float)
     parser.add_argument('--weight_decay', default=0, type=float)
     parser.add_argument('--loss', default='L1', help="['L1','MSE','Huber','plcc'] 중 택1", type=str)
 
     parser.add_argument('--batch_size', default=4, type=int)
-    parser.add_argument('--num_epochs', default=500, type=int)
+    parser.add_argument('--num_epochs', default=2000, type=int)
     
     parser.add_argument('--shuffle', default=True)
     parser.add_argument('--train_path', default='./data/Hwaseong_data.xlsx')
