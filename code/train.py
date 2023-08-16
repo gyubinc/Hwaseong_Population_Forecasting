@@ -41,10 +41,16 @@ def LSTM_train(args):
             outputs = model(inputs)
             loss = criterion(outputs, labels)
             
+            if (i == 1 and  epoch % 100 == 1):
+                print('*'*30)
+                print(f'{loss}, {outputs}, {labels}')
+                print('*'*30)
+            
+            
             # Backward and optimize
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()            
-        if (epoch+1) % 50 == 0:
+        if (epoch+1) % 100 == 0:
             print ('Epoch [{}/{}], Loss: {:.4f}' 
                 .format(epoch+1, args.num_epochs, loss.item()))
