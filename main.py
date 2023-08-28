@@ -16,15 +16,11 @@ if __name__ == "__main__":
     wandb.run.save()
     
     wandb.config = {
-    "epochs": 2000,
-    "learning_rate": 1e-2,
-    "batch_size": 4,
-    "window_size": 20
+    "num_epochs": args.num_epochs,
+    "learning_rate": args.learning_rate,
+    "batch_size": args.batch_size,
+    "window_size": args.window_size
     }
-    
-    args_dict = vars(args)
-    
-    wandb.config.update(args_dict)
     
     LSTM_train(args)
     print('finished')
