@@ -43,7 +43,9 @@ def LSTM_train(args):
             
             if (i == 1 and  epoch % 100 == 1):
                 print('*'*30)
-                print(f'{loss}, {outputs}, {labels}')
+                print(f'loss : {loss}\n\
+                      outputs : {outputs}\n\
+                      labels : {labels}')
                 print('*'*30)
             
             
