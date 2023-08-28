@@ -12,12 +12,12 @@ def get_args():
     parser.add_argument('--num_epochs', default=2000, type=int)
     
     parser.add_argument('--shuffle', default=True)
-    parser.add_argument('--train_path', default='./data/last_data.xlsx')
-    parser.add_argument('--dev_path', default='./data/last_data.xlsx')
-    parser.add_argument('--test_path', default='./data/last_data.xlsx')
-    parser.add_argument('--predict_path', default='./data/last_data.xlsx')
+    parser.add_argument('--train_path', default='./data/semi_last.xlsx')
+    parser.add_argument('--dev_path', default='./data/semi_last.xlsx')
+    parser.add_argument('--test_path', default='./data/semi_last.xlsx')
+    parser.add_argument('--predict_path', default='./data/semi_last.xlsx')
 
-    parser.add_argument('--input_size', default = 173, type = int)
+    parser.add_argument('--input_size', default = 152, type = int)
     parser.add_argument('--hidden_size', default = 64, type = int)
     parser.add_argument('--num_layers', default = 2, type = int)
     parser.add_argument('--output_size', default = 1, type = int)
