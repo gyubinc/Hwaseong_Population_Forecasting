@@ -86,7 +86,7 @@ def LSTM_train(args):
             # Forward
             outputs = model(inputs)
             loss = criterion(outputs, labels)
-            print(f'{i} 개월 loss : {round(loss.item(),4)}')
+            print(f'{i+1} 개월 loss : {round(loss.item(),4)}')
             wandb.log({"val_loss": loss.item()
                 })
         
