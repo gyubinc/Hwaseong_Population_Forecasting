@@ -54,15 +54,17 @@ def LSTM_train(args):
             
             
             # Backward and optimize
-            wandb.log({"loss": loss.item(), "epoch": epoch,
-                       "learning_rate" : args.learning_rate
-                           
-                        })
+
 
             
             optimizer.zero_grad()
             loss.backward()
-            optimizer.step()            
+            optimizer.step()       
+              
+        wandb.log({"loss": loss.item(), "epoch": epoch,
+            "learning_rate" : args.learning_rate
+            })
+        
         if (epoch+1) % 100 == 0:
             print ('Epoch [{}/{}], Loss: {:.4f}' 
                 .format(epoch+1, args.num_epochs, loss.item()))
@@ -75,12 +77,16 @@ def LSTM_train(args):
     print(f'window size : {args.window_size}')
     print('*' * 30)
     
-    
-    for i, (inputs, labels) in enumerate(valid_loader):
-        inputs = inputs.to(device)
-        labels = labels.unsqueeze(1).to(device)
+    model.eval()
+    with torch.no_grad():
+        for i, (inputs, labels) in enumerate(valid_loader):
+            inputs = inputs.to(device)
+            labels = labels.unsqueeze(1).to(device)
 
-        # Forward
-        outputs = model(inputs)
-        loss = criterion(outputs, labels)
-        print(f'{i} 개월 loss : {round(loss.item(),4)}')
+            # Forward
+            outputs = model(inputs)
+            loss = criterion(outputs, labels)
+            print(f'{i} 개월 loss : {round(loss.item(),4)}')
+            wandb.log({"val_loss": loss.item()
+                })
+        
