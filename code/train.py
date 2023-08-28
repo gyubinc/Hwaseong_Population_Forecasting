@@ -4,6 +4,7 @@ from .model import LSTM
 from .dataset import create_data_loader
 from .preprocessing import preprocessing
 import pandas as pd
+import wandb
 
 class RMSELoss(nn.Module):
     def forward(self, y_pred, y_true):
@@ -18,8 +19,13 @@ def LSTM_train(args):
 
     # 데이터 준비
     df = pd.read_excel(args.train_path)
-    df = preprocessing(df)
-    train_loader = create_data_loader(df, args.window_size, args.batch_size)
+    train_df, valid_df = preprocessing(df, args.window_size)
+    
+    
+    train_loader = create_data_loader(train_df, args.window_size, args.batch_size)
+    valid_loader = create_data_loader(valid_df, args.window_size, batch_size = 1)
+    
+
     
     # 모델 준비
     model = LSTM(args.input_size, args.hidden_size, args.num_layers, args.output_size).to(device)
@@ -30,8 +36,6 @@ def LSTM_train(args):
     criterion = RMSELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
     
-    
-    
     for epoch in range(args.num_epochs):
         for i, (inputs, labels) in enumerate(train_loader):
             inputs = inputs.to(device)
@@ -41,18 +45,42 @@ def LSTM_train(args):
             outputs = model(inputs)
             loss = criterion(outputs, labels)
             
-            if (i == 1 and  epoch % 100 == 1):
-                print('*'*30)
-                print(f'loss : {loss}\n\
-                      outputs : {outputs}\n\
-                      labels : {labels}')
-                print('*'*30)
+            # if (i == 1 and  epoch % 100 == 1):
+            #     print('*'*30)
+            #     print(f'loss : {loss}\n\
+            #           outputs : {outputs}\n\
+            #           labels : {labels}')
+            #     print('*'*30)
             
             
             # Backward and optimize
+            wandb.log({"loss": loss.item(), "epoch": epoch,
+                       "learning_rate" : args.learning_rate
+                           
+                        })
+
+            
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()            
         if (epoch+1) % 100 == 0:
             print ('Epoch [{}/{}], Loss: {:.4f}' 
                 .format(epoch+1, args.num_epochs, loss.item()))
+
+    print('*' * 30)
+    print('valid test start')
+    print(f'epochs : {args.num_epochs}')
+    print(f'learning rate : {args.learning_rate}')
+    print(f'batch size : {args.batch_size}')
+    print(f'window size : {args.window_size}')
+    print('*' * 30)
+    
+    
+    for i, (inputs, labels) in enumerate(valid_loader):
+        inputs = inputs.to(device)
+        labels = labels.unsqueeze(1).to(device)
+
+        # Forward
+        outputs = model(inputs)
+        loss = criterion(outputs, labels)
+        print(f'{i} 개월 loss : {round(loss.item(),4)}')
