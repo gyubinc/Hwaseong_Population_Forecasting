@@ -14,7 +14,7 @@ class TimeSeriesDataset(Dataset):
         
         x = torch.tensor(self.df.iloc[idx:idx+self.window_size, :].to_numpy(), dtype=torch.float32)
         if self.df.shape[1] > 1:
-            y = torch.tensor(self.df.iloc[idx+self.window_size, 1], dtype=torch.float32)
+            y = torch.tensor(self.df.iloc[idx+self.window_size, -1], dtype=torch.float32)
         else:
             y = None
         return x, y
