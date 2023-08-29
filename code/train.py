@@ -23,7 +23,7 @@ def LSTM_train(args):
     
     
     train_loader = create_data_loader(train_df, args.window_size, args.batch_size, args.option, args.step)
-    valid_loader = create_data_loader(valid_df, args.window_size, batch_size = 1, args.option, args.step)
+    valid_loader = create_data_loader(valid_df, args.window_size, 1, args.option, args.step)
     
 
     
