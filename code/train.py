@@ -18,7 +18,8 @@ def LSTM_train(args):
     print(f"current device: {device}")
 
     # 데이터 준비
-    df = pd.read_excel(args.train_path)
+    df = pd.read_excel(args.train_path, index_col = '월별')
+    
     train_df, valid_df = preprocessing(df, args.window_size)
     
     
