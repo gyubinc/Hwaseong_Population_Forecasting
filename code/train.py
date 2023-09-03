@@ -5,12 +5,18 @@ from .dataset import create_data_loader
 from .preprocessing import preprocessing
 import pandas as pd
 import wandb
+import numpy as np
 
 class RMSELoss(nn.Module):
     def forward(self, y_pred, y_true):
         mse_loss = nn.functional.mse_loss(y_pred, y_true)
         rmse_loss = torch.sqrt(mse_loss)
         return rmse_loss
+
+class MAELoss(nn.Module):
+    def forward(self, y_pred, y_true):
+        mae_loss = nn.functional.l1_loss(y_pred, y_true)
+        return mae_loss
 
 
 def LSTM_train(args):
@@ -19,7 +25,7 @@ def LSTM_train(args):
 
     # 데이터 준비
     df = pd.read_excel(args.train_path, index_col = '월별')
-    
+
     train_df, valid_df = preprocessing(df, args.window_size)
     
     
@@ -35,6 +41,7 @@ def LSTM_train(args):
     # metric, optimizer 준비
     #criterion = nn.MSELoss()
     criterion = RMSELoss()
+    MAE_criterion = MAELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
     
     for epoch in range(args.num_epochs):
@@ -45,16 +52,6 @@ def LSTM_train(args):
             # Forward
             outputs = model(inputs)
             loss = criterion(outputs, labels)
-            
-            # if (i == 1 and  epoch % 100 == 1):
-            #     print('*'*30)
-            #     print(f'loss : {loss}\n\
-            #           outputs : {outputs}\n\
-            #           labels : {labels}')
-            #     print('*'*30)
-            
-            
-            # Backward and optimize
 
 
             
@@ -87,7 +84,9 @@ def LSTM_train(args):
             # Forward
             outputs = model(inputs)
             loss = criterion(outputs, labels)
-            print(f'{i+1} 개월 loss : {round(loss.item(),4)}')
+
+            L1loss =  MAE_criterion(outputs,labels)
+            print(f'{i+1} 개월 RMSE loss : {round(loss.item(),4)}, MAE loss : {round(L1loss.item(), 4)}')
             wandb.log({"val_loss": loss.item()
                 })
         
