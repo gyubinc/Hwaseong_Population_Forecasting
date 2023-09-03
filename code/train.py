@@ -26,7 +26,7 @@ def LSTM_train(args):
     # 데이터 준비
     df = pd.read_excel(args.train_path, index_col = '월별')
 
-    train_df, valid_df = preprocessing(df, args.window_size)
+    train_df, valid_df = preprocessing(df, args.window_size, args.step)
     
     
     train_loader = create_data_loader(train_df, args.window_size, args.batch_size, args.option, args.step)
@@ -43,12 +43,14 @@ def LSTM_train(args):
     criterion = RMSELoss()
     MAE_criterion = MAELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
-    
+
     for epoch in range(args.num_epochs):
         for i, (inputs, labels) in enumerate(train_loader):
             inputs = inputs.to(device)
-            labels = labels.unsqueeze(1).to(device)
-
+            
+            labels = labels.to(device)
+            # labels = labels.unsqueeze(1).to(device)
+            
             # Forward
             outputs = model(inputs)
             loss = criterion(outputs, labels)
@@ -79,14 +81,15 @@ def LSTM_train(args):
     with torch.no_grad():
         for i, (inputs, labels) in enumerate(valid_loader):
             inputs = inputs.to(device)
-            labels = labels.unsqueeze(1).to(device)
-
+            labels = labels.to(device)
+            # labels = labels.unsqueeze(1).to(device)
             # Forward
             outputs = model(inputs)
-            loss = criterion(outputs, labels)
-
-            L1loss =  MAE_criterion(outputs,labels)
-            print(f'{i+1} 개월 RMSE loss : {round(loss.item(),4)}, MAE loss : {round(L1loss.item(), 4)}')
-            wandb.log({"val_loss": loss.item()
-                })
-        
+            for i in range(args.step):
+                val_pred = outputs[0][i]
+                val_label = labels[0][i]
+                loss = criterion(val_pred, val_label)
+                L1loss =  MAE_criterion(val_pred, val_label)
+                print(f'{i+1} 개월 RMSE loss : {round(loss.item(),4)}, MAE loss : {round(L1loss.item(), 4)}')
+                wandb.log({"val_loss": loss.item()
+                    })
