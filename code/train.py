@@ -1,13 +1,15 @@
 import torch
 import torch.nn as nn
-from .model import LSTM
-from .dataset import create_data_loader, Transformer_create_data_loader
+from .model import LSTM, TFModel
+from .dataset import create_data_loader, Transformer_create_data_loader, windowDataset
 from .preprocessing import preprocessing
 import pandas as pd
 import wandb
 import numpy as np
-
+from torch.utils.data import DataLoader, Dataset
 from transformers import TimeSeriesTransformerConfig, TimeSeriesTransformerModel
+from tqdm import tqdm
+
 
 class RMSELoss(nn.Module):
     def forward(self, y_pred, y_true):
@@ -95,9 +97,7 @@ def LSTM_train(args):
                 print(f'{i+1} 개월 RMSE loss : {round(loss.item(),4)}, MAE loss : {round(L1loss.item(), 4)}')
                 wandb.log({"val_loss": loss.item()
                     })
-                
-                
-                
+                             
 def Transformer_train(args):
     print('Time Series Transformer model')
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -180,3 +180,44 @@ def Transformer_train(args):
                 print(f'{i+1} 개월 RMSE loss : {round(loss.item(),4)}, MAE loss : {round(L1loss.item(), 4)}')
                 wandb.log({"val_loss": loss.item()
                     })
+                
+                
+def uni_Transformer(args):
+    
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f"current device: {device}")
+
+    # 데이터 준비
+    df = pd.read_excel(args.train_path, index_col = '월별')
+
+    data_train, data_test = preprocessing(df, args.window_size, args.step)
+    data_train = data_train['총인구']
+    data_test = data_test['총인구']
+    
+    iw = 30
+    ow = 12
+    
+    
+
+    train_dataset = windowDataset(data_train, input_window=iw, output_window=ow, stride=1)
+    train_loader = DataLoader(train_dataset, batch_size=4)
+    
+    lr = 1e-3
+    model = TFModel(iw, ow, 512, 8, 4, 0.1).to(device)
+    breakpoint()
+    criterion = nn.MSELoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    epoch = 1000
+    model.train()
+    progress = tqdm(range(epoch))
+    for i in progress:
+        batchloss = 0.0
+        for (inputs, outputs) in train_loader:
+            optimizer.zero_grad()
+            src_mask = model.generate_square_subsequent_mask(inputs.shape[1]).to(device)
+            result = model(inputs.float().to(device),  src_mask)
+            loss = criterion(result, outputs[:,:,0].float().to(device))
+            loss.backward()
+            optimizer.step()
+            batchloss += loss
+        progress.set_description("loss: {:0.6f}".format(batchloss.cpu().item() / len(train_loader)))
