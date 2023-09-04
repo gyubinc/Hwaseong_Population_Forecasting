@@ -1,5 +1,5 @@
 from code.utils import seed_everything
-from code.train import LSTM_train
+from code.train import LSTM_train, Transformer_train, uni_Transformer
 from code.arguments import get_args
 import wandb
 
@@ -9,10 +9,10 @@ if __name__ == "__main__":
     args = get_args()
     
     # WandB
-    wandb.login(key = 'your api key' )
+    wandb.login(key = '28c2410815e7aa7e1b762a66d5dc91dc8edb48d8' )
     wandb.init(project='Hwaseong_Population_Forecasting')
     
-    wandb.run.name = 'Experiment_01'
+    wandb.run.name = 'Experiment_18'
     wandb.run.save()
     
     wandb.config = {
@@ -22,7 +22,9 @@ if __name__ == "__main__":
     "window_size": args.window_size
     }
     
-    LSTM_train(args)
+    # LSTM_train(args)
+    # Transformer_train(args)
+    uni_Transformer(args)
     print('finished')
     
     
