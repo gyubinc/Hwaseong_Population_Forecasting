@@ -194,7 +194,7 @@ def uni_Transformer(args):
     data_train = data_train['총인구']
     data_test = data_test['총인구']
     
-    iw = 30
+    iw = args.window_size
     ow = 12
     
     
@@ -202,22 +202,68 @@ def uni_Transformer(args):
     train_dataset = windowDataset(data_train, input_window=iw, output_window=ow, stride=1)
     train_loader = DataLoader(train_dataset, batch_size=4)
     
+    valid_dataset = windowDataset(data_test, input_window=iw, output_window=ow, stride=1)
+    valid_loader = DataLoader(valid_dataset, batch_size=1)
+    
     lr = 1e-3
     model = TFModel(iw, ow, 512, 8, 4, 0.1).to(device)
-    breakpoint()
-    criterion = nn.MSELoss()
+    # breakpoint()
+    criterion = RMSELoss()
+    MAE_criterion = MAELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    epoch = 1000
+    epoch = 2000
     model.train()
     progress = tqdm(range(epoch))
+    
+    
     for i in progress:
         batchloss = 0.0
+        loss_back = []
+        MAE_loss_back = []
         for (inputs, outputs) in train_loader:
             optimizer.zero_grad()
             src_mask = model.generate_square_subsequent_mask(inputs.shape[1]).to(device)
             result = model(inputs.float().to(device),  src_mask)
             loss = criterion(result, outputs[:,:,0].float().to(device))
             loss.backward()
+            
+            
             optimizer.step()
             batchloss += loss
+            
+            L1loss =  MAE_criterion(result, outputs[:,:,0].float().to(device))
+            loss_back.append(loss.item())
+            MAE_loss_back.append(L1loss.item())
+            
+            
+        wandb.log({"mean_RMSE": np.mean(loss_back), 'mean_MAE': np.mean(MAE_loss_back),
+                   "epoch": epoch, "learning_rate" : args.learning_rate,
+                    })
         progress.set_description("loss: {:0.6f}".format(batchloss.cpu().item() / len(train_loader)))
+    
+    print('*' * 30)
+    print('valid test start')
+    print(f'epochs : {args.num_epochs}')
+    print(f'learning rate : {args.learning_rate}')
+    print(f'batch size : {args.batch_size}')
+    print(f'window size : {args.window_size}')
+    print('*' * 30)
+    
+    model.eval()
+    with torch.no_grad():
+        for i, (inputs, labels) in enumerate(valid_loader):
+            inputs = inputs.to(device)
+            labels = labels.to(device)
+            # labels = labels.unsqueeze(1).to(device)
+            # Forward
+            
+            src_mask = model.generate_square_subsequent_mask(inputs.shape[1]).to(device)
+            result = model(inputs.float().to(device),  src_mask)
+            for i in range(args.step):
+                val_pred = result[0][i]
+                val_label = labels[0][i]
+                loss = criterion(val_pred, val_label)
+                L1loss =  MAE_criterion(val_pred, val_label)
+                print(f'{i+1} 개월 RMSE loss : {round(loss.item(),1)}, MAE loss : {round(L1loss.item(), 1)}')
+                wandb.log({"val_loss": loss.item()
+                    })
