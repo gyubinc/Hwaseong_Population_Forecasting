@@ -302,7 +302,7 @@ def multi_Transformer(args):
     valid_loader = DataLoader(valid_dataset, batch_size=1)
     
     lr = 1e-4
-    model = TFModel(iw*50, ow, 512, 8, 4, 0.1).to(device)
+    model = TFModel(iw*50, ow, 128, 8, 4, 0.1).to(device)
     # breakpoint()
     criterion = RMSELoss()
     MAE_criterion = MAELoss()
