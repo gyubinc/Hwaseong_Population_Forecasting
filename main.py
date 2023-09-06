@@ -1,5 +1,5 @@
 from code.utils import seed_everything
-from code.train import LSTM_train, Transformer_train, uni_Transformer
+from code.train import LSTM_train, Transformer_train, uni_Transformer, multi_Transformer
 from code.arguments import get_args
 import wandb
 
@@ -12,7 +12,7 @@ if __name__ == "__main__":
     wandb.login(key = '28c2410815e7aa7e1b762a66d5dc91dc8edb48d8' )
     wandb.init(project='Hwaseong_Population_Forecasting')
     
-    wandb.run.name = 'Experiment_18'
+    wandb.run.name = 'TimeSeries_Transformer_01'
     wandb.run.save()
     
     wandb.config = {
@@ -24,7 +24,7 @@ if __name__ == "__main__":
     
     # LSTM_train(args)
     # Transformer_train(args)
-    uni_Transformer(args)
+    multi_Transformer(args)
     print('finished')
     
     
