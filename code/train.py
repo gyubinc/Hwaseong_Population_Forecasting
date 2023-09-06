@@ -205,13 +205,13 @@ def uni_Transformer(args):
     valid_dataset = windowDataset(data_test, input_window=iw, output_window=ow, stride=1)
     valid_loader = DataLoader(valid_dataset, batch_size=1)
     
-    lr = 1e-3
-    model = TFModel(iw, ow, 512, 8, 4, 0.1).to(device)
+    lr = 1e-4
+    model = TFModel(iw, ow, 256, 8, 4, 0.1).to(device)
     # breakpoint()
     criterion = RMSELoss()
     MAE_criterion = MAELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    epoch = 2000
+    epoch = 500
     model.train()
     progress = tqdm(range(epoch))
     
@@ -259,11 +259,19 @@ def uni_Transformer(args):
             
             src_mask = model.generate_square_subsequent_mask(inputs.shape[1]).to(device)
             result = model(inputs.float().to(device),  src_mask)
+            pred_list = []
+            label_list = []
             for i in range(args.step):
                 val_pred = result[0][i]
                 val_label = labels[0][i]
-                loss = criterion(val_pred, val_label)
-                L1loss =  MAE_criterion(val_pred, val_label)
-                print(f'{i+1} 개월 RMSE loss : {round(loss.item(),1)}, MAE loss : {round(L1loss.item(), 1)}')
+
+                pred_list.append(val_pred)
+                label_list.append(val_label)
+                real_loss = val_pred - val_label
+                print(f'{i+1} 개월 loss : {real_loss}')
                 wandb.log({"val_loss": loss.item()
                     })
+                
+            loss = criterion(pred_list, label_list)
+            L1loss =  MAE_criterion(pred_list, label_list)
+            print(f'RMSE loss : {round(loss,1)}, MAE loss : {round(L1loss, 1)}')
