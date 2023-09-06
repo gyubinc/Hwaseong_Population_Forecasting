@@ -339,8 +339,8 @@ def multi_Transformer(args):
     
     print('*' * 30)
     print('valid test start')
-    print(f'epochs : {args.num_epochs}')
-    print(f'learning rate : {args.learning_rate}')
+    print(f'epochs : {epoch}')
+    print(f'learning rate : {lr}')
     print(f'batch size : {args.batch_size}')
     print(f'window size : {args.window_size}')
     print('*' * 30)
