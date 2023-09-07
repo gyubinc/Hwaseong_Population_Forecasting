@@ -192,13 +192,10 @@ class Multi_WindowDataset(Dataset):
             start_y = stride*i + input_window
             end_y = start_y + output_window
             Y[:,i] = y[start_y:end_y]
-        print(X.shape)
-        print(Y.shape)
         X = X.reshape(X.shape[0], X.shape[1], 1).transpose((1,0,2))
         Y = Y.reshape(Y.shape[0], Y.shape[1], 1).transpose((1,0,2))
         self.x = X
         self.y = Y
-        
         self.len = len(X)
     def __getitem__(self, i):
         return self.x[i], self.y[i]
