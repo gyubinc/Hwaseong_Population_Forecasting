@@ -25,7 +25,7 @@ if __name__ == "__main__":
     
     # LSTM_train(args)
     # Transformer_train(args)
-    uni_Transformer(args)
+    Multi_Transformer(args)
     print('finished')
     
     
