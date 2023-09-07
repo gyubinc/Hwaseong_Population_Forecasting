@@ -1,4 +1,3 @@
-import pandas as pd
 def preprocessing(df, window_size, step):
     # 날짜를 정수로 변경
     #df['월별'] = pd.to_datetime(df['월별'])
