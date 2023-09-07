@@ -9,6 +9,7 @@ import numpy as np
 from torch.utils.data import DataLoader, Dataset
 from transformers import TimeSeriesTransformerConfig, TimeSeriesTransformerModel
 from tqdm import tqdm
+from sklearn.metrics import mean_absolute_error, mean_squared_error 
 
 
 class RMSELoss(nn.Module):
@@ -279,6 +280,12 @@ def uni_Transformer(args):
 
 def multi_Transformer(args):
     
+    lr = args.learning_rate
+    epoch = args.num_epochs
+    iw = args.window_size
+    batch_size = args.batch_size
+    ow = args.output_size
+    
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"current device: {device}")
 
@@ -289,28 +296,34 @@ def multi_Transformer(args):
     data_train = data_train
     data_test = data_test
     
-    iw = args.window_size
-    print(iw)
-    ow = 12
+
     
     
 
     train_dataset = Multi_WindowDataset(data_train, input_window=iw, output_window=ow, stride=1)
-    train_loader = DataLoader(train_dataset, batch_size=4)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size)
     
     valid_dataset = Multi_WindowDataset(data_test, input_window=iw, output_window=ow, stride=1)
     valid_loader = DataLoader(valid_dataset, batch_size=1)
     
-    lr = 1e-4
+    
+    
     model = TFModel(iw*50, ow, 128, 8, 4, 0.1).to(device)
     # breakpoint()
     criterion = RMSELoss()
     MAE_criterion = MAELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    epoch = 500
+    
     model.train()
     progress = tqdm(range(epoch))
     
+    print('*' * 30)
+    print('train start')
+    print(f'epochs : {epoch}')
+    print(f'learning rate : {lr}')
+    print(f'batch size : {batch_size}')
+    print(f'window size : {iw}')
+    print('*' * 30)
     
     for i in progress:
         batchloss = 0.0
@@ -337,13 +350,7 @@ def multi_Transformer(args):
                     })
         progress.set_description("loss: {:0.6f}".format(batchloss.cpu().item() / len(train_loader)))
     
-    print('*' * 30)
-    print('valid test start')
-    print(f'epochs : {epoch}')
-    print(f'learning rate : {lr}')
-    print(f'batch size : {args.batch_size}')
-    print(f'window size : {args.window_size}')
-    print('*' * 30)
+
     
     model.eval()
     with torch.no_grad():
@@ -360,14 +367,16 @@ def multi_Transformer(args):
             for i in range(args.step):
                 val_pred = result[0][i]
                 val_label = labels[0][i]
-
-                pred_list.append(val_pred)
-                label_list.append(val_label)
+                pred_list.append(int(val_pred))
+                label_list.append(int(val_label))
+                
                 real_loss = val_pred - val_label
+                
+                
                 print(f'{i+1} 개월 loss : {real_loss}')
                 wandb.log({"val_loss": loss.item()
                     })
-                
-            loss = criterion(np.array(pred_list), np.array(label_list))
-            L1loss =  MAE_criterion(np.array(pred_list), np.array(label_list))
+            
+            loss = np.sqrt(mean_squared_error(pred_list, label_list))
+            L1loss =  mean_absolute_error(pred_list, label_list)
             print(f'RMSE loss : {round(loss,1)}, MAE loss : {round(L1loss, 1)}')
