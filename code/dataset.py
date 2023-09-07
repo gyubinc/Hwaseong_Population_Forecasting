@@ -1,8 +1,6 @@
 import torch
-import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader 
 import numpy as np
-from torch.utils.data import DataLoader, Dataset
 
 '''
 종속변수는 항상 마지막 열에 위치시키고 시작

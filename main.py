@@ -9,23 +9,23 @@ if __name__ == "__main__":
     seed_everything(42)
     
     
-    # WandB
-    wandb.login(key = '28c2410815e7aa7e1b762a66d5dc91dc8edb48d8' )
-    wandb.init(project='Hwaseong_Population_Forecasting')
+    # # WandB
+    # wandb.login(key = '28c2410815e7aa7e1b762a66d5dc91dc8edb48d8' )
+    # wandb.init(project='Hwaseong_Population_Forecasting')
     
-    wandb.run.name = 'TimeSeries_Transformer_01'
-    wandb.run.save()
+    # wandb.run.name = 'TimeSeries_Transformer_01'
+    # wandb.run.save()
     
-    wandb.config = {
-    "num_epochs": args.num_epochs,
-    "learning_rate": args.learning_rate,
-    "batch_size": args.batch_size,
-    "window_size": args.window_size
-    }
+    # wandb.config = {
+    # "num_epochs": args.num_epochs,
+    # "learning_rate": args.learning_rate,
+    # "batch_size": args.batch_size,
+    # "window_size": args.window_size
+    # }
     
     # LSTM_train(args)
     # Transformer_train(args)
-    multi_Transformer(args)
+    uni_Transformer(args)
     print('finished')
     
     
