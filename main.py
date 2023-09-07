@@ -5,8 +5,9 @@ import wandb
 
 if __name__ == "__main__":
     # seed 고정
-    seed_everything(42)
     args = get_args()
+    seed_everything(42)
+    
     
     # WandB
     wandb.login(key = '28c2410815e7aa7e1b762a66d5dc91dc8edb48d8' )
