@@ -65,6 +65,9 @@ def check_assumption(df1, df2) :
         print(f"기본 가정을 만족하지 않는 적절하지 않은 검정입니다.")
 
 
+check_assumption(df1, df2)
+MDM_test(df1, df2)
+
 
 
 
