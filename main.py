@@ -1,30 +1,31 @@
 from code.utils import seed_everything
-from code.train import LSTM_train, Transformer_train, uni_Transformer
+from code.train import LSTM_train,  uni_Transformer, multi_Transformer
 from code.arguments import get_args
 import wandb
 
 if __name__ == "__main__":
     # seed 고정
-    seed_everything(42)
     args = get_args()
+    seed_everything(42)
     
-    # WandB
-    wandb.login(key = '28c2410815e7aa7e1b762a66d5dc91dc8edb48d8' )
-    wandb.init(project='Hwaseong_Population_Forecasting')
     
-    wandb.run.name = 'Experiment_18'
-    wandb.run.save()
+    # # WandB
+    # wandb.login(key = '28c2410815e7aa7e1b762a66d5dc91dc8edb48d8' )
+    # wandb.init(project='Hwaseong_Population_Forecasting')
     
-    wandb.config = {
-    "num_epochs": args.num_epochs,
-    "learning_rate": args.learning_rate,
-    "batch_size": args.batch_size,
-    "window_size": args.window_size
-    }
+    # wandb.run.name = 'TimeSeries_Transformer_01'
+    # wandb.run.save()
+    
+    # wandb.config = {
+    # "num_epochs": args.num_epochs,
+    # "learning_rate": args.learning_rate,
+    # "batch_size": args.batch_size,
+    # "window_size": args.window_size
+    # }
     
     # LSTM_train(args)
     # Transformer_train(args)
-    uni_Transformer(args)
+    multi_Transformer(args)
     print('finished')
     
     

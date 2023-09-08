@@ -45,7 +45,7 @@ class TFModel(nn.Module):
             nn.Linear(iw, (iw+ow)//2),
             nn.ReLU(),
             nn.Linear((iw+ow)//2, ow)
-        ) 
+        )
 
     def generate_square_subsequent_mask(self, sz):
         mask = (torch.triu(torch.ones(sz, sz)) == 1).transpose(0, 1)
