@@ -359,7 +359,10 @@ def CPU_multi_Transformer(args):
         batchloss = 0.0
         loss_back = []
         MAE_loss_back = []
-        for (inputs, outputs) in train_loader:
+        for j, (inputs, outputs) in enumerate(train_loader):
+            if j%200 == 0:
+                optimizer = torch.optim.Adam(model.parameters(), lr=lr/2)
+            
             optimizer.zero_grad()
             src_mask = model.generate_square_subsequent_mask(inputs.shape[1]).to(device)
             result = model(inputs.float().to(device),  src_mask)
