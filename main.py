@@ -1,6 +1,7 @@
 from code.utils import seed_everything
 from code.train import LSTM_train,  uni_Transformer, multi_Transformer, CPU_multi_Transformer
 from code.arguments import get_args
+from code.inference import inference
 import wandb
 
 if __name__ == "__main__":
@@ -25,7 +26,11 @@ if __name__ == "__main__":
     
     # LSTM_train(args)
     # multi_Transformer(args)
-    CPU_multi_Transformer(args)
+    # CPU_multi_Transformer(args)
+    if args.inference != 0:
+        inference(args)
+    else :
+        CPU_multi_Transformer(args)
     # uni_Transformer(args)
     
     print('finished')
