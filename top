@@ -1,0 +1,598 @@
+[33mcommit 6187a4b07673ecd99024b6839c570988118000ae[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Merge: 03f9c2d 6bfc9a2
+Author: Mok Jinhwi <jhmok4@gmail.com>
+Date:   Fri Sep 8 21:14:39 2023 +0900
+
+    Merge branch 'main' of https://github.com/gyubinc/Hwaseong_Population_Forecasting
+
+[33mcommit 6bfc9a2f40c1c0b39ddd794f06ffce5fada17140[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Sep 8 00:34:36 2023 +0900
+
+    fix) 글자변경
+
+[33mcommit 2addfd3896738eff8a98138649d2eae8756c42be[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Sep 8 00:34:13 2023 +0900
+
+    feat) Multi_TFT
+
+[33mcommit e96d9aea4c98ff58c5029cd629e55e3aeece2179[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 21:25:13 2023 +0900
+
+    fix ) fixed library
+
+[33mcommit f563162e3dd87bf98c2cc25fbceb25ec9774e657[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 21:24:12 2023 +0900
+
+    feat) wandb 제거
+
+[33mcommit 91f4b106c18c7b11a75421a4edb8bd68e4e30689[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 21:23:52 2023 +0900
+
+    fix) 비사용 라이브러리
+
+[33mcommit a875a060e49351cdb2da365ea8078bc8e13d3e8e[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 20:48:21 2023 +0900
+
+    feat) metrix
+
+[33mcommit a63a46e239bff090e644bda4d30429c802649d41[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 20:48:09 2023 +0900
+
+    fix) condentation
+
+[33mcommit cf798dd3fe080f8034a8bb648787c55de4d03cd0[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 20:47:43 2023 +0900
+
+    feat) dataset
+
+[33mcommit c6b7c7190031f89e0d462684f2f1cdc3394e6deb[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 20:47:37 2023 +0900
+
+    feat) arguments
+
+[33mcommit dcbe7c838c1039a8f8d09e25ab7317625e63e311[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 20:46:49 2023 +0900
+
+    feat) args 순서 변경
+
+[33mcommit e2aa76cf490bb4a72b7be65eb13155b3ea8ca253[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 03:40:26 2023 +0900
+
+    feat) train_3
+
+[33mcommit 60613aafefe1d6c488cd9908474c1c7383bde070[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 02:57:34 2023 +0900
+
+    docs) data_sample
+
+[33mcommit c94b48c3ab5e8278ca4741bd8f6e59132b4dfc1f[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 02:35:49 2023 +0900
+
+    feat)train_2
+
+[33mcommit 45a7b9b7566afbc959f523e31a112f5cc33d9e19[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Sep 7 02:33:16 2023 +0900
+
+    feat) train_1
+
+[33mcommit 6418a07f49dd1d9ffa88bcf4128e0228909de72c[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Sep 6 18:58:26 2023 +0900
+
+    feat) Multi_TFT
+
+[33mcommit be12957785d447cdaf4e13c5d36061cb6d2da5e2[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Sep 6 18:58:19 2023 +0900
+
+    feat) Multi_TFT
+
+[33mcommit 74950adefb1a084e42558d475531993d45958071[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Sep 6 18:57:58 2023 +0900
+
+    feat) multi_TFT
+
+[33mcommit fb5cea6d0125ee424edfa1c2b7e950273222116e[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Sep 6 15:09:15 2023 +0900
+
+    feat) U_M vanila TFT
+
+[33mcommit f0eabd765582b27d5ae2e5a26130739dee57f724[m
+Merge: e227943 9dbdf61
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Tue Sep 5 13:55:21 2023 +0900
+
+    Merge branch 'main' of https://github.com/gyubinc/Hwaseong_Population_Forecasting
+
+[33mcommit e2279438124f1cd0eb9a555dda6099a1c2cdd66b[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Tue Sep 5 13:54:53 2023 +0900
+
+    feat) 단변량 transformer
+
+[33mcommit 9dbdf610700dd1a86ef7ba760eb1c86aff780cf1[m
+Author: ty1en01 <103137367+ty1en01@users.noreply.github.com>
+Date:   Mon Sep 4 22:00:59 2023 +0900
+
+    Add files via upload
+
+[33mcommit c8e43cbb8725d392dee0bd9104fd6ace03d3a08c[m
+Author: ty1en01 <103137367+ty1en01@users.noreply.github.com>
+Date:   Mon Sep 4 22:00:44 2023 +0900
+
+    Delete AR_validation_초안.ipynb
+
+[33mcommit 475570a307737cefbca23a11697ff1f09c166a37[m
+Author: ty1en01 <103137367+ty1en01@users.noreply.github.com>
+Date:   Mon Sep 4 21:59:21 2023 +0900
+
+    AR Baseline prediction draft
+
+[33mcommit 03f9c2dd724927edcb7b89457e3272d0cd08fa13[m
+Author: Mok Jinhwi <jhmok4@gmail.com>
+Date:   Mon Sep 4 21:58:34 2023 +0900
+
+    Edit .gitignore
+    Add R, py
+
+[33mcommit 6e89e9fe9715314c0ce7a30d4f0f2935a0114a07[m
+Merge: 8a99cfc 721ee0f
+Author: Mok Jinhwi <jhmok4@gmail.com>
+Date:   Mon Sep 4 21:57:13 2023 +0900
+
+    Merge branch 'main' of https://github.com/gyubinc/Hwaseong_Population_Forecasting
+
+[33mcommit 721ee0f1436776fd9c0637e6ac6302d6624ad237[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Sep 4 17:41:27 2023 +0900
+
+    feat) TFmodel train
+
+[33mcommit 00fe0116c2f62a633d66a568548455e210ed1b49[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Sep 4 17:41:16 2023 +0900
+
+    feat) TFmodel
+
+[33mcommit 368c268640c19f24929012e0158853e5b19d5808[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Sep 4 17:41:09 2023 +0900
+
+    feat) 단변량 transformer dataset
+
+[33mcommit 720ab289c43f0e0497ec9cb7a0ed6959b791347d[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Sep 4 17:40:56 2023 +0900
+
+    feat) 단변량 transformer 구현
+
+[33mcommit 1588f731da45b79c0926d3cbaf5a474666625ad5[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Sep 4 04:49:45 2023 +0900
+
+    feat) 다변량 transforemr 일시정지
+
+[33mcommit c52df71b773e2548e75d6f6190adf5c312758921[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Sep 4 03:37:41 2023 +0900
+
+    fix) fix to use multivariate data
+
+[33mcommit 2803e28589a249f909feaf2671077f1aafc29411[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Sep 4 03:37:26 2023 +0900
+
+    feat) arguments
+
+[33mcommit abc63b45efe43f2d6a6236fe73269a51ebab31a0[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Sep 4 03:37:15 2023 +0900
+
+    feat) LSTM train 완료
+
+[33mcommit 50b5f56a39fbafc623b53b6d5003b9202b68ed48[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Sun Sep 3 23:57:15 2023 +0900
+
+    feat) valid 구현
+
+[33mcommit 8a99cfc6c60b5bfa403069328fcebebc06171bea[m
+Merge: 8102f93 a1851d5
+Author: Mok Jinhwi <jhmok4@gmail.com>
+Date:   Sat Sep 2 16:25:31 2023 +0900
+
+    Merge branch 'main' of https://github.com/gyubinc/Hwaseong_Population_Forecasting
+
+[33mcommit a1851d5add22acded3fe1fdd0a836da3cb519089[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Aug 31 00:02:25 2023 +0900
+
+    fix) pandas read function error
+
+[33mcommit 0e7104adde3c77c25d4027471409a89f714f6391[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Aug 31 00:01:54 2023 +0900
+
+    feat) ADF 전처리
+
+[33mcommit 2cb4e6fe70523b755a8aeaa8034829c57c8f814e[m
+Merge: 541a791 2c87b73
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Aug 31 00:01:30 2023 +0900
+
+    Merge commit '2c87b7324f62bbc5b1b94f31d90f879d410cdf45'
+
+[33mcommit 541a791b32b83e1abf42d5299aebf41435561e4b[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Aug 31 00:00:52 2023 +0900
+
+    feat) 전처리
+
+[33mcommit 8102f93ce580875d01aaf31f97722836058b54af[m
+Author: Mok Jinhwi <jhmok4@gmail.com>
+Date:   Tue Aug 29 16:09:54 2023 +0900
+
+    feat R
+
+[33mcommit 2c87b7324f62bbc5b1b94f31d90f879d410cdf45[m
+Author: Mok Jinhwi <jhmok4@gmail.com>
+Date:   Tue Aug 29 15:22:47 2023 +0900
+
+    Delete AR
+
+[33mcommit a9c2cda09f2e1224b85e0ba683b8647ded1d9385[m
+Author: Mok Jinhwi <jhmok4@gmail.com>
+Date:   Tue Aug 29 15:22:16 2023 +0900
+
+    AR 추가
+
+[33mcommit e17c1b22b01fbd8c65f62056c6869f5d30cfb000[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Tue Aug 29 15:18:17 2023 +0900
+
+    fix) valid batch 1 조정
+
+[33mcommit 65406014c7726e9c440d7ad4842448e9c5c6c9aa[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Tue Aug 29 15:17:27 2023 +0900
+
+    feat) train step, option 수정
+
+[33mcommit db1fde48395446c313ab176731b035c1c1a52e3c[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Tue Aug 29 15:17:15 2023 +0900
+
+    feat) option, step in dataset
+
+[33mcommit 2a317c2bd3e123dcc325732cceb01055218b7a42[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Tue Aug 29 15:17:07 2023 +0900
+
+    feat) option, step in arguments
+
+[33mcommit ddc7af9ac70284dd29c36e82a05c1b2bc4a0de9a[m
+Merge: 12bc02b 69ed57d
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Tue Aug 29 15:09:10 2023 +0900
+
+    Merge commit '69ed57d9702074252b83f6fb586bc74635d781fa'
+
+[33mcommit 12bc02bd631c1e8ba8a298666a1c59e5afc9f21b[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Tue Aug 29 15:07:57 2023 +0900
+
+    feat) multivariate 구현
+
+[33mcommit 69ed57d9702074252b83f6fb586bc74635d781fa[m
+Author: Mok Jinhwi <jhmok4@gmail.com>
+Date:   Mon Aug 28 23:57:51 2023 +0900
+
+    feat. 시계열 확인 및 검정
+
+[33mcommit b714947d7a81371dad018d4f409e7e6e72bf9349[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 19:03:52 2023 +0900
+
+    fix) 개월 수정
+
+[33mcommit 9b7f2cfc149a885105adb44268839b25d6d52892[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 19:03:30 2023 +0900
+
+    fix) add wandb last
+
+[33mcommit e5d35abcf0c9324738b5abe391e10138810cbcd3[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 19:03:12 2023 +0900
+
+    docs) git ignore
+
+[33mcommit d188e51816e9a3ffb8c702ed019a4f0ac71d98a4[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 18:49:41 2023 +0900
+
+    feat) torch no_grad
+
+[33mcommit e82c4235bba293aba8c3700235a4a8410921d31b[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 18:46:04 2023 +0900
+
+    feat) wandb
+
+[33mcommit ea4b59f47b0edfbce8e8c55210fd0ca6ee405bd1[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 18:45:57 2023 +0900
+
+    feat) valid, train split
+
+[33mcommit 94652e5e7cd80192c95b442188f925f866079e30[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 18:45:46 2023 +0900
+
+    feat) argument
+
+[33mcommit 23185306af0b23d9d2e79aa95b7a5ef276461903[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 18:45:41 2023 +0900
+
+    feat) wandb
+
+[33mcommit add6b1551d6fd904b478e70ebfcfecc6c2f6ae00[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 16:50:43 2023 +0900
+
+    fix)print 방식 수정
+
+[33mcommit 45246a845d3f1b170e27f17c311ebea128d1b2da[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 16:50:33 2023 +0900
+
+    fix) breakpoint 제거
+
+[33mcommit fb4d36f17f6ec0db3bd36dd190ca7a7a5034001b[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 16:50:24 2023 +0900
+
+    feat) TCODE로 수정
+
+[33mcommit df2bf0a60719395dc6cc48fcd18b0804cd76b603[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 28 16:50:15 2023 +0900
+
+    feat) window, learning rate
+
+[33mcommit a6becb96926d3c72b622d75ea1df3c028a5b046a[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Sat Aug 26 21:31:01 2023 +0900
+
+    feat) plot
+
+[33mcommit 99561315843db551c3a7e70c005e7a12e085c997[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Aug 25 17:25:40 2023 +0900
+
+    feat) 데이터 전처리
+
+[33mcommit d4073c2e7fce46e4c4019bfa1b6021032ac4cb18[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Aug 25 02:16:22 2023 +0900
+
+    feat) Concat File
+
+[33mcommit e4c0685fd650edf7fa84a2ef9ab18681765581c7[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Aug 25 01:45:21 2023 +0900
+
+    feat) Extract excel file
+
+[33mcommit 6ad8616093c1e1a20be2f6df2765e278ffce9f8b[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Aug 25 01:40:12 2023 +0900
+
+    feat) 기온,강수 마무리
+
+[33mcommit 5f1f3583d8fe268b5e98fc940365d2f64e1b39e9[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Aug 25 01:33:38 2023 +0900
+
+    fix) 오류 수정
+
+[33mcommit 0927b5ad7ebba0a3834221bdd7cdca159448f28b[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Tue Aug 22 15:29:28 2023 +0900
+
+    feat) last EDA
+
+[33mcommit 0b6d1894a846769a50654985319fea7e955886ca[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 21 23:23:00 2023 +0900
+
+    feat) 강수 데이터처리
+
+[33mcommit 454f6afc967b57c70a074a7c5610e07bad18057a[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Mon Aug 21 22:54:47 2023 +0900
+
+    add temperature
+
+[33mcommit 9104ac31039c6166397e8a0f8ca86c26d092e95b[m
+Merge: cc71f39 cb46c31
+Author: Mok Jinhwi <jhmok4@gmail.com>
+Date:   Sat Aug 19 00:09:59 2023 +0900
+
+    Merge branch 'main' of https://github.com/gyubinc/Hwaseong_Population_Forecasting
+
+[33mcommit cc71f3945a8dc39b5799ae44fae3efdcea1006e2[m
+Author: Mok Jinhwi <jhmok4@gmail.com>
+Date:   Sat Aug 19 00:02:52 2023 +0900
+
+    Edit .gitignore & Add EDA
+
+[33mcommit cb46c31819bf3985d118efa94d02d18e043040c2[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Aug 18 23:59:09 2023 +0900
+
+    docs) example
+
+[33mcommit 8cb726ee8467fc31d3f6df997efe7bb61d1baf9e[m
+Merge: 66fc068 c001dd9
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Aug 18 23:56:12 2023 +0900
+
+    Merge branch 'main' of https://github.com/gyubinc/Hwaseong_Population_Forecasting
+
+[33mcommit 66fc068fb784c3029a8beec0011daedfdf9033cf[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Aug 18 23:55:54 2023 +0900
+
+    example
+
+[33mcommit c001dd95a4bc755ffa9dd02480429a2f7504cf69[m
+Author: Taeyeong-Go <97603350+Taeyeong-Go@users.noreply.github.com>
+Date:   Fri Aug 18 23:55:22 2023 +0900
+
+    Add files via upload
+
+[33mcommit c2f079adcfe410010f37e1ac48a6f7e96207fe30[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Aug 18 20:59:10 2023 +0900
+
+    docs) 논의지점
+
+[33mcommit 0a53bec8b5a83bedf77e5e060113d3077cf6ba70[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Fri Aug 18 20:56:28 2023 +0900
+
+    feat) 월간 데이터 체크
+
+[33mcommit c7096e877681158c1e8fba3e01e8dfb93cffe57d[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Thu Aug 17 20:20:24 2023 +0900
+
+    feat) EDA start
+
+[33mcommit 3de412429516e6d0a753d890cbb4e5db6c04fcf8[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 16 13:29:24 2023 +0900
+
+    fix) fix example
+
+[33mcommit 532bee128f4d2277289d7920cd0dbf5447e3ab74[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 15:58:44 2023 +0900
+
+    feat) arguments
+
+[33mcommit 872d755ca604939efe8ed35b79268c30c3357a05[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 15:58:39 2023 +0900
+
+    docs) my requirements.txt
+
+[33mcommit fcbfb44ead772ec1ca7624e6cbfe2cbaa8ad241a[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 15:31:00 2023 +0900
+
+    feat) EDA example
+
+[33mcommit 463fd36c83d750abfc9e9e46411b0dacdd73b6ed[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 15:30:41 2023 +0900
+
+    feat) main file
+
+[33mcommit fc9e3a091a230b595dd163839e82974c3fc15baf[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 15:30:29 2023 +0900
+
+    feat) train file
+
+[33mcommit e9990fdea8b85e9f84735205143ec4cbe93d9d4e[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 15:30:21 2023 +0900
+
+    feat) preprocessing sample
+
+[33mcommit c70c8460dbb98b925109ce815191aef1df4d5698[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 15:30:10 2023 +0900
+
+    feat) model
+
+[33mcommit 6e92e5924c0d961dcde84e5bb712169f5037f41b[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 15:29:45 2023 +0900
+
+    feat) dataset
+
+[33mcommit dbbcc2e0b71cd57115228b7a38f80fb222968b0b[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 15:29:34 2023 +0900
+
+    feat) arguments
+
+[33mcommit 051c788fadb5f7c5adace3e9423431e0b3566312[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 13:30:00 2023 +0900
+
+    docs) git ignore
+
+[33mcommit 96e6f4e2e6590b8612d1fb373add2358dfe05663[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 13:28:52 2023 +0900
+
+    feat) LSTM
+
+[33mcommit 5952f5bca0403f8c668d02832b3aa79b1901a851[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 13:27:44 2023 +0900
+
+    feat) arguments.py
+
+[33mcommit 71f08622629cb1a6ca38591ec0a31e412306bf9f[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 13:16:44 2023 +0900
+
+    fix) make directory
+
+[33mcommit 139e2f8ce5b08382af4585a71a057128ee3dc899[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 13:16:14 2023 +0900
+
+    feat) seed
+
+[33mcommit 4e42a7daf5ab4491523ff8f6eb6cda9587bfd322[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 13:15:54 2023 +0900
+
+    fix) reject pycache
+
+[33mcommit 3fe757293dd858b52f21cc2a2519d04501572869[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 13:07:54 2023 +0900
+
+    docs) git ignore
+
+[33mcommit 8a0c8146f03d907fd3b614e1f94d9b29ba29a9ce[m
+Author: gyubinc <yeppi315@gmail.com>
+Date:   Wed Aug 9 13:03:11 2023 +0900
+
+    docs) Upload _main file
+
+[33mcommit 6d8f6b428c61e4784aee5d9b54
