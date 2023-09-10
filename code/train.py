@@ -360,8 +360,8 @@ def CPU_multi_Transformer(args):
         loss_back = []
         MAE_loss_back = []
         for j, (inputs, outputs) in enumerate(train_loader):
-            if j%200 == 0:
-                optimizer = torch.optim.Adam(model.parameters(), lr=lr/2)
+            if j>0 and j%200 == 0:
+                optimizer = torch.optim.Adam(model.parameters(), lr=lr/(j//200))
             
             optimizer.zero_grad()
             src_mask = model.generate_square_subsequent_mask(inputs.shape[1]).to(device)
