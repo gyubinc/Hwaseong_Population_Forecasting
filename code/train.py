@@ -344,7 +344,7 @@ def CPU_multi_Transformer(args):
     MAE_criterion = MAELoss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer=optimizer,
-                                        lr_lambda=lambda epoch: 0.95 ** epoch,
+                                        lr_lambda=lambda epoch: 0.98 ** epoch,
                                         last_epoch=-1,
                                         verbose=False)
     print('*' * 30)
