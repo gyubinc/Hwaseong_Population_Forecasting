@@ -323,8 +323,7 @@ def CPU_multi_Transformer(args):
     df = pd.read_excel(args.train_path, index_col = '월별')
 
     data_train, data_test = preprocessing(df, args.window_size, args.step)
-    data_train = data_train
-    data_test = data_test
+
     
 
     
@@ -404,23 +403,22 @@ def CPU_multi_Transformer(args):
             loss_list = []
             print(result)
             # breakpoint()
-            for i in range(args.step):
-                val_pred = result[0][i]
-                val_label = labels[0][i][0]
+            for j in range(args.step):
+                val_pred = result[0][j]
+                val_label = labels[0][j][0]
                 real_pred = float(val_pred)
                 real_label = float(val_label)
-                print(f'{i+1} 개월 예측 : {int(real_pred)}명')
-                print(f'{i+1} 개월 정답 : {int(real_label)}명')
+                print(f'{j+1} 개월 예측 : {int(real_pred)}명')
+                print(f'{j+1} 개월 정답 : {int(real_label)}명')
                 pred_list.append(real_pred)
                 label_list.append(real_label)
                 
                 real_loss = real_pred - real_label
                 loss_list.append(real_loss)
                 
-                print(f'{i+1} 개월 loss : {real_loss}')
+                print(f'{j+1} 개월 loss : {real_loss}')
                 # wandb.log({"val_loss": loss.item()
                 #     })
-            print(loss_list)
             loss = np.sqrt(abs(mean_squared_error(pred_list, label_list)))
             L1loss =  mean_absolute_error(pred_list, label_list)
             print(f'RMSE loss : {round(loss,1)}, MAE loss : {round(L1loss, 1)}')
