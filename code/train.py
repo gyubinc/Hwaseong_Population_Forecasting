@@ -90,12 +90,19 @@ def LSTM_train(args):
             # labels = labels.unsqueeze(1).to(device)
             # Forward
             outputs = model(inputs)
+            pred_list = []
+            label_list = []
             for i in range(args.step):
                 val_pred = outputs[0][i]
                 val_label = labels[0][i]
+                pred_list.append(val_pred)
+                label_list.append(val_label)
                 loss = criterion(val_pred, val_label)
                 L1loss =  MAE_criterion(val_pred, val_label)
-                print(f'{i+1} 개월 RMSE loss : {round(loss.item(),4)}, MAE loss : {round(L1loss.item(), 4)}')
+                print(f'{val_pred - val_label}')
+            loss = np.sqrt(mean_squared_error(pred_list, label_list))
+            L1loss =  mean_absolute_error(pred_list, label_list)
+            print(f'RMSE loss : {round(loss,1)}, MAE loss : {round(L1loss, 1)}')                
                 # wandb.log({"val_loss": loss.item()
                 #     })
                              
@@ -130,9 +137,6 @@ def uni_Transformer(args):
     criterion = RMSELoss()
     MAE_criterion = MAELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    model.train()
-    progress = tqdm(range(epoch))
-    
     print('*' * 30)
     print('train start')
     print(f'epochs : {epoch}')
@@ -140,7 +144,8 @@ def uni_Transformer(args):
     print(f'batch size : {batch_size}')
     print(f'window size : {iw}')
     print('*' * 30)   
-    
+    model.train()
+    progress = tqdm(range(epoch))
     for i in progress:
         batchloss = 0.0
         loss_back = []
@@ -231,10 +236,6 @@ def multi_Transformer(args):
     criterion = RMSELoss()
     MAE_criterion = MAELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    
-    model.train()
-    progress = tqdm(range(epoch))
-    
     print('*' * 30)
     print('train start')
     print(f'epochs : {epoch}')
@@ -242,6 +243,10 @@ def multi_Transformer(args):
     print(f'batch size : {batch_size}')
     print(f'window size : {iw}')
     print('*' * 30)
+    model.train()
+    progress = tqdm(range(epoch))
+    
+
     
     for i in progress:
         batchloss = 0.0
@@ -285,6 +290,7 @@ def multi_Transformer(args):
             for i in range(args.step):
                 val_pred = result[0][i]
                 val_label = labels[0][i]
+                print(val_pred)
                 print(val_label)
                 pred_list.append(int(val_pred))
                 label_list.append(int(val_label))
