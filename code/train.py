@@ -409,7 +409,8 @@ def CPU_multi_Transformer(args):
                 val_label = labels[0][i][0]
                 real_pred = float(val_pred * std_population + mean_population)
                 real_label = float(val_label * std_population + mean_population)
-                print(f' {i+1} 개월 예측 : {int(real_pred)}명')
+                print(f'{i+1} 개월 예측 : {int(real_pred)}명')
+                print(f'{i+1} 개월 정답 : {int(real_label)}명')
                 pred_list.append(real_pred)
                 label_list.append(real_label)
                 
