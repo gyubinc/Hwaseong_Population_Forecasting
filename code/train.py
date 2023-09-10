@@ -342,9 +342,9 @@ def CPU_multi_Transformer(args):
     # breakpoint()
     criterion = RMSELoss()
     MAE_criterion = MAELoss()
-    optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer=optimizer,
-                                        lr_lambda=lambda epoch: 0.98 ** epoch,
+                                        lr_lambda=lambda epoch: 0.99 ** epoch,
                                         last_epoch=-1,
                                         verbose=False)
     print('*' * 30)
@@ -363,6 +363,7 @@ def CPU_multi_Transformer(args):
         batchloss = 0.0
         loss_back = []
         MAE_loss_back = []
+        
         for (inputs, outputs) in train_loader:
 
             
