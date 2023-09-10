@@ -307,3 +307,110 @@ def multi_Transformer(args):
             loss = np.sqrt(abs(mean_squared_error(pred_list, label_list)))
             L1loss =  mean_absolute_error(pred_list, label_list)
             print(f'RMSE loss : {round(loss,1)}, MAE loss : {round(L1loss, 1)}')
+            
+def CPU_multi_Transformer(args):
+    
+    lr = args.learning_rate
+    epoch = args.num_epochs
+    iw = args.window_size
+    batch_size = args.batch_size
+    ow = args.output_size
+    
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f"current device: {device}")
+
+    # 데이터 준비
+    df = pd.read_excel(args.train_path, index_col = '월별')
+
+    data_train, data_test = preprocessing(df, args.window_size, args.step)
+    data_train = data_train
+    data_test = data_test
+    
+
+    
+    
+
+    train_dataset = Multi_WindowDataset(data_train, input_window=iw, output_window=ow, stride=1)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size)
+    
+    valid_dataset = Multi_WindowDataset(data_test, input_window=iw, output_window=ow, stride=1)
+    valid_loader = DataLoader(valid_dataset, batch_size=1)
+    
+    
+    
+    model = TFModel(iw*50, ow, 128, 8, 4, 0.1).to(device)
+    # breakpoint()
+    criterion = RMSELoss()
+    MAE_criterion = MAELoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    print('*' * 30)
+    print('train start')
+    print(f'epochs : {epoch}')
+    print(f'learning rate : {lr}')
+    print(f'batch size : {batch_size}')
+    print(f'window size : {iw}')
+    print('*' * 30)
+    model.train()
+    progress = tqdm(range(epoch))
+    
+
+    
+    for i in progress:
+        batchloss = 0.0
+        loss_back = []
+        MAE_loss_back = []
+        for (inputs, outputs) in train_loader:
+            optimizer.zero_grad()
+            src_mask = model.generate_square_subsequent_mask(inputs.shape[1]).to(device)
+            result = model(inputs.float().to(device),  src_mask)
+            loss = criterion(result, outputs[:,:,0].float().to(device))
+            loss.backward()
+            
+            
+            optimizer.step()
+            batchloss += loss
+            
+            L1loss =  MAE_criterion(result, outputs[:,:,0].float().to(device))
+            loss_back.append(loss.item())
+            MAE_loss_back.append(L1loss.item())
+            
+            
+        # wandb.log({"mean_RMSE": np.mean(loss_back), 'mean_MAE': np.mean(MAE_loss_back),
+        #            "epoch": epoch, "learning_rate" : args.learning_rate,
+        #             })
+        progress.set_description("loss: {:0.6f}".format(batchloss.cpu().item() / len(train_loader)))
+    
+    device = 'cpu'
+    model.to(device)
+    model.eval()
+    with torch.no_grad():
+        for i, (inputs, labels) in enumerate(valid_loader):
+            inputs = inputs.to(device)
+            labels = labels.to(device)
+            # labels = labels.unsqueeze(1).to(device)
+            # Forward
+            
+            src_mask = model.generate_square_subsequent_mask(inputs.shape[1]).to(device)
+            result = model(inputs.float().to(device),  src_mask)
+            pred_list = []
+            label_list = []
+            print(result)
+            # breakpoint()
+            for i in range(args.step):
+                val_pred = result[0][i]
+                val_label = labels[0][i][0]
+                print(val_pred)
+                print(val_label)
+                pred_list.append(int(val_pred))
+                label_list.append(int(val_label))
+                
+                real_loss = val_pred - val_label
+                
+                
+                print(f'{i+1} 개월 loss : {real_loss}')
+                # wandb.log({"val_loss": loss.item()
+                #     })
+            
+            loss = np.sqrt(abs(mean_squared_error(pred_list, label_list)))
+            L1loss =  mean_absolute_error(pred_list, label_list)
+            print(f'RMSE loss : {round(loss,1)}, MAE loss : {round(L1loss, 1)}')
