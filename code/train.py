@@ -321,12 +321,7 @@ def CPU_multi_Transformer(args):
 
     # 데이터 준비
     df = pd.read_excel(args.train_path, index_col = '월별')
-    
-    mean_population = np.mean(df['총인구'])
-    std_population = np.std(df['총인구'])
-    print(f'mean : {mean_population} std : {std_population}')
-    
-    df['총인구'] = (df['총인구'] - mean_population) / std_population
+
     data_train, data_test = preprocessing(df, args.window_size, args.step)
     data_train = data_train
     data_test = data_test
@@ -407,8 +402,8 @@ def CPU_multi_Transformer(args):
             for i in range(args.step):
                 val_pred = result[0][i]
                 val_label = labels[0][i][0]
-                real_pred = float(val_pred * std_population + mean_population)
-                real_label = float(val_label * std_population + mean_population)
+                real_pred = float(val_pred)
+                real_label = float(val_label)
                 print(f'{i+1} 개월 예측 : {int(real_pred)}명')
                 print(f'{i+1} 개월 정답 : {int(real_label)}명')
                 pred_list.append(real_pred)
