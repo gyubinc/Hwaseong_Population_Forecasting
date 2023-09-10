@@ -288,6 +288,7 @@ def multi_Transformer(args):
             pred_list = []
             label_list = []
             print(result)
+            breakpoint()
             for i in range(args.step):
                 val_pred = result[0][i]
                 val_label = labels[0][i][0]
