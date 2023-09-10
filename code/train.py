@@ -342,7 +342,11 @@ def CPU_multi_Transformer(args):
     # breakpoint()
     criterion = RMSELoss()
     MAE_criterion = MAELoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer=optimizer,
+                                        lr_lambda=lambda epoch: 0.95 ** epoch,
+                                        last_epoch=-1,
+                                        verbose=False)
     print('*' * 30)
     print('train start')
     print(f'epochs : {epoch}')
@@ -375,7 +379,7 @@ def CPU_multi_Transformer(args):
             L1loss =  MAE_criterion(result, outputs[:,:,0].float().to(device))
             loss_back.append(loss.item())
             MAE_loss_back.append(L1loss.item())
-            
+        scheduler.step()    
             
         # wandb.log({"mean_RMSE": np.mean(loss_back), 'mean_MAE': np.mean(MAE_loss_back),
         #            "epoch": epoch, "learning_rate" : args.learning_rate,
