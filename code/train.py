@@ -321,9 +321,12 @@ def CPU_multi_Transformer(args):
 
     # 데이터 준비
     df = pd.read_excel(args.train_path, index_col = '월별')
-    max_population = max(df['총인구'])
-    print(f' sclaling with max population : {max_population}')
-    df['총인구'] = df['총인구'] / max_population
+    
+    mean_population = np.mean(df['총인구'])
+    std_population = np.std(df['총인구'])
+    print(f'mean : {mean_population} std : {std_population}')
+    
+    df['총인구'] = (df['총인구'] - mean_population) / std_population
     data_train, data_test = preprocessing(df, args.window_size, args.step)
     data_train = data_train
     data_test = data_test
@@ -404,15 +407,15 @@ def CPU_multi_Transformer(args):
             for i in range(args.step):
                 val_pred = result[0][i]
                 val_label = labels[0][i][0]
-                print(val_pred * max_population)
-                print(val_label * max_population)
-                pred_list.append(int(val_pred) * max_population)
-                label_list.append(int(val_label) * max_population)
+                print(val_pred * std_population + mean_population)
+                print(val_label * std_population + mean_population)
+                pred_list.append(int(val_pred) * std_population + mean_population)
+                label_list.append(int(val_label) * std_population + mean_population)
                 
                 real_loss = val_pred - val_label
-                loss_list.append(float(real_loss * max_population))
+                loss_list.append(float(real_loss * std_population + mean_population))
                 
-                print(f'{i+1} 개월 loss : {real_loss * max_population}')
+                print(f'{i+1} 개월 loss : {real_loss * std_population + mean_population}')
                 # wandb.log({"val_loss": loss.item()
                 #     })
             print(loss_list)
