@@ -321,7 +321,9 @@ def CPU_multi_Transformer(args):
 
     # 데이터 준비
     df = pd.read_excel(args.train_path, index_col = '월별')
-
+    max_population = max(df['총인구'])
+    print(f' sclaling with max population : {max_population}')
+    df['총인구'] = df['총인구'] / max_population
     data_train, data_test = preprocessing(df, args.window_size, args.step)
     data_train = data_train
     data_test = data_test
@@ -359,11 +361,8 @@ def CPU_multi_Transformer(args):
         batchloss = 0.0
         loss_back = []
         MAE_loss_back = []
-        for j, (inputs, outputs) in enumerate(train_loader):
-            if j>0 and j%200 == 0:
-                lr=lr/(j//200 + 1)
-                optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-                print(f'learning rate changed : {lr}')
+        for (inputs, outputs) in train_loader:
+
             
             optimizer.zero_grad()
             src_mask = model.generate_square_subsequent_mask(inputs.shape[1]).to(device)
@@ -399,23 +398,24 @@ def CPU_multi_Transformer(args):
             result = model(inputs.float().to(device),  src_mask)
             pred_list = []
             label_list = []
+            loss_list = []
             print(result)
             # breakpoint()
             for i in range(args.step):
                 val_pred = result[0][i]
                 val_label = labels[0][i][0]
-                print(val_pred)
-                print(val_label)
-                pred_list.append(int(val_pred))
-                label_list.append(int(val_label))
+                print(val_pred * max_population)
+                print(val_label * max_population)
+                pred_list.append(int(val_pred) * max_population)
+                label_list.append(int(val_label) * max_population)
                 
                 real_loss = val_pred - val_label
+                loss_list.append(float(real_loss * max_population))
                 
-                
-                print(f'{i+1} 개월 loss : {real_loss}')
+                print(f'{i+1} 개월 loss : {real_loss * max_population}')
                 # wandb.log({"val_loss": loss.item()
                 #     })
-            
+            print(loss_list)
             loss = np.sqrt(abs(mean_squared_error(pred_list, label_list)))
             L1loss =  mean_absolute_error(pred_list, label_list)
             print(f'RMSE loss : {round(loss,1)}, MAE loss : {round(L1loss, 1)}')
