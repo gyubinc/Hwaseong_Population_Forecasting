@@ -287,9 +287,10 @@ def multi_Transformer(args):
             result = model(inputs.float().to(device),  src_mask)
             pred_list = []
             label_list = []
+            print(result)
             for i in range(args.step):
                 val_pred = result[0][i]
-                val_label = labels[0][i]
+                val_label = labels[0][i][0]
                 print(val_pred)
                 print(val_label)
                 pred_list.append(int(val_pred))
@@ -302,6 +303,6 @@ def multi_Transformer(args):
                 # wandb.log({"val_loss": loss.item()
                 #     })
             
-            loss = np.sqrt(mean_squared_error(pred_list, label_list))
+            loss = np.sqrt(abs(mean_squared_error(pred_list, label_list)))
             L1loss =  mean_absolute_error(pred_list, label_list)
             print(f'RMSE loss : {round(loss,1)}, MAE loss : {round(L1loss, 1)}')
