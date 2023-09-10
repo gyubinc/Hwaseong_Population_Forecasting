@@ -361,7 +361,7 @@ def CPU_multi_Transformer(args):
         MAE_loss_back = []
         for j, (inputs, outputs) in enumerate(train_loader):
             if j>0 and j%200 == 0:
-                lr=lr/(j//200)
+                lr=lr/(j//200 + 1)
                 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
                 print(f'learning rate changed : {lr}')
             
