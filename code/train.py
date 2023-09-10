@@ -407,15 +407,16 @@ def CPU_multi_Transformer(args):
             for i in range(args.step):
                 val_pred = result[0][i]
                 val_label = labels[0][i][0]
-                print(val_pred * std_population + mean_population)
-                print(val_label * std_population + mean_population)
-                pred_list.append(int(val_pred) * std_population + mean_population)
-                label_list.append(int(val_label) * std_population + mean_population)
+                real_pred = float(val_pred * std_population + mean_population)
+                real_label = float(val_label * std_population + mean_population)
+                print(real_pred)
+                pred_list.append(real_pred)
+                label_list.append(real_label)
                 
-                real_loss = val_pred - val_label
-                loss_list.append(float(real_loss * std_population + mean_population))
+                real_loss = real_pred - real_label
+                loss_list.append(real_loss)
                 
-                print(f'{i+1} 개월 loss : {real_loss * std_population + mean_population}')
+                print(f'{i+1} 개월 loss : {real_loss}')
                 # wandb.log({"val_loss": loss.item()
                 #     })
             print(loss_list)
