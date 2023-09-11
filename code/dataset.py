@@ -169,7 +169,7 @@ class Multi_WindowDataset(Dataset):
         #총 데이터의 개수
         y = x['총인구']
         # columns_num = len(x.iloc[0,:])
-        columns_num = 50
+        columns_num = len(x.columns)
 
         L = y.shape[0]
         #stride씩 움직일 때 생기는 총 sample의 개수
