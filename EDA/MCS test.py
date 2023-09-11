@@ -196,58 +196,31 @@ class ModelConfidenceSet(object):
         self.pvalues = pd.Series(pvals.ravel(), index=self.excluded + self.included)
         return self
     
-    
-# Simulate data and predicts
-def DataGeneratingProcess(a0, a1, a2, b1, N):
-    y = np.zeros(N)
-    np.random.seed(123)
-    y[0] = 5
-    epsilon = np.random.normal(0,1,N)
-    for t in range(1, N-1):
-        y[t+1] = a0 + a1*y[t-1]+a2*y[t-2]+epsilon[t]+b1*epsilon[t-1]
-    return y
 
-N = 100
-y  = DataGeneratingProcess(0.1,0.8,-0.2,0.3,N)
-x1 = DataGeneratingProcess(0.1,0.75,-0.2,0.3,N)
-x2 = DataGeneratingProcess(0.1,0.9,-0.2,0.3,N)
-x3 = DataGeneratingProcess(0.1,0.0,-0.0,0.1,N)
-x4 = DataGeneratingProcess(0.1,0.9,-0.0,0.0,N)
-x5 = DataGeneratingProcess(0.1,0.4,-0.5,0.0,N)
 
-# Wrap data and compute the Mean Absolute Error
-data = pd.DataFrame(np.c_[x1,x2,x3,x4,x5], columns=['M1','M2','M3','M4','M5'])
-for model in ['M1','M2','M3','M4','M5']:
-    data[model] = np.abs(data[model] - y) 
-    
-    
 
-df = pd.read_excel("./data/최종 예측값 테이블.xlsx")    
 
-# RMSE와 MAE 칼럼을 제거
+
+df = pd.read_excel("./data/PredictData.xlsx")
 df_filtered = df.drop(columns=['RMSE', 'MAE'])
-
-
-
-# 첫 번째 칼럼을 칼럼의 인덱스로 설정
 df_filtered.set_index('Unnamed: 0', inplace=True)
-
-# 데이터프레임을 전치
 df_transposed = df_filtered.transpose()
 
-# 결과 확인
-df_transposed.head()
-
-names = ['XGB Regressor', 'AdaBoost Regressor', 'CatBoost Regresssor', 
+names = ['XGB Regressor', 'AdaBoost Regressor', 'CatBoost Regresssor',
 'RandomForest Regressor', 'GradientBoostingRegressor',
 'KNeighbors Regressor', 'Dummy Regressor', 'LGBM Regressor',
-'ExtraTreesRegressor', 'Huber Regressor', 'PassiveAggressive Regressor',
-'Ridge', 'BayesianRidge', 'LinearRegression', 'DecisionTreeRegressor',
+'ExtraTreesRegressor', 'PassiveAggressive Regressor', 'Ridge',
+'BayesianRidge', 'LinearRegression', 'DecisionTreeRegressor',
 'OrthogonalMatchingPursuit', 'LassoLars', 'Lasso', 'ElasticNet', 'LSTM',
-'U_TFT', 'M_TFT']
+'U_TFT', 'M_TFT', 'AR(4)', 'ARIMA(5,0,1)']
 
 for model in names :
     df_transposed[model] = np.abs(df_transposed[model] - df_transposed["실제 값"])  
 
 data = df_transposed.drop(columns = ["실제 값"])
 
+
+
+mcs = ModelConfidenceSet(data, alpha = 0.5, B = 5000, w = 3).run()
+mcs.pvalues
+len(mcs.included)
