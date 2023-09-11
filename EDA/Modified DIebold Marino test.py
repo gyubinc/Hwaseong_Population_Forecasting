@@ -117,7 +117,12 @@ def DM_test(f1, f2, y, loss_type="SE", h=1, c=False, H1="same"):
     
     return result
 
-
+def show_result() :
+    print("p-value", result["p_value"])
+    if result["p_value"] < 0.05 :
+        print(f"방법1의 예측 정확도가 방법2의 예측정확도보다 통계적으로 유의하게 높습니다.")
+    else :
+        print(f"방법1의 예측 정확도와 방법2의 예측정확도는 차이가 없습니다.")
 
 
 df = pd.read_excel("./data/최종 예측값 테이블.xlsx")
@@ -129,6 +134,14 @@ df2 = np.array(df_sort.iloc[1, 1:13])
 
 
 
-result = DM_test(df1, df2, df0, loss_type = "SE", h=1, c=True, H1="more")
+result = DM_test(df1, df2, df0, loss_type = "AE", h=1, c=True, H1="more")
 check_assumption(df1, df2, df0)
-print("p-value", result["p_value"])
+show_result()
+
+
+
+
+
+
+
+
