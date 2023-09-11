@@ -5,34 +5,19 @@ from code.inference import inference
 import wandb
 
 if __name__ == "__main__":
-    # seed 고정
+    # arguments 정의
     args = get_args()
+    
+    # seed 고정
     seed_everything(42)
-    
-    
-    # # WandB
-    # wandb.login(key = '28c2410815e7aa7e1b762a66d5dc91dc8edb48d8' )
-    # wandb.init(project='Hwaseong_Population_Forecasting')
-    
-    # wandb.run.name = 'TimeSeries_Transformer_01'
-    # wandb.run.save()
-    
-    # wandb.config = {
-    # "num_epochs": args.num_epochs,
-    # "learning_rate": args.learning_rate,
-    # "batch_size": args.batch_size,
-    # "window_size": args.window_size
-    # }
-    
+
     # LSTM_train(args)
-    # multi_Transformer(args)
-    # CPU_multi_Transformer(args)
+    # uni_Transformer(args)
     if args.inference != 0:
         inference(args)
     else :
         CPU_multi_Transformer(args)
-    # uni_Transformer(args)
     
-    print('finished')
+    print('train finished')
     
     
