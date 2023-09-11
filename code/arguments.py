@@ -27,6 +27,8 @@ def get_args():
     parser.add_argument('--option', default = 2, type = int)
     parser.add_argument('--step', default = 12, type = int)
     
+    parser.add_argument('--inference', default = 0, type = int)
+    
     return parser.parse_args()
     # args = parser.parse_args(args=[])
     # return args
