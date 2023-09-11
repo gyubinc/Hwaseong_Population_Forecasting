@@ -18,10 +18,8 @@ class LSTM(nn.Module):
 
         out, _ = self.lstm(x, (h0, c0))
         out = self.fc(out[:, -1, :])
-        #breakpoint()
         return out
-    
-    
+
 class TFModel(nn.Module):
     def __init__(self,iw, ow, d_model, nhead, nlayers, dropout=0.5):
         super(TFModel, self).__init__()
