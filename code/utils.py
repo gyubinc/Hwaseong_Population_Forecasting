@@ -3,7 +3,7 @@ import random
 import os
 import torch
 
-
+# random seed 고정
 def seed_everything(seed):
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
