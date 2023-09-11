@@ -3,17 +3,8 @@ from torch.utils.data import Dataset, DataLoader
 import numpy as np
 
 '''
-종속변수는 항상 마지막 열에 위치시키고 시작
+종속변수는 항상 '총인구'로 통일
 uni-variate 데이터는 무조건 one-step 기준
-
-option
-1 = univariate
-2 = multivariate
-
-step
-1 = one-step
-n = multi-step (n-step)
-
 '''
 
 
@@ -68,8 +59,6 @@ def create_data_loader(df, window_size, batch_size, option, step):
     return data_loader
 
 
-
-
 class Transformer_TimeSeriesDataset(Dataset):
     def __init__(self, df, window_size, option, step):
         self.df = df
@@ -122,17 +111,13 @@ class Transformer_TimeSeriesDataset(Dataset):
                 y = None
             return x, y
         
-        
-        
+                
 def Transformer_create_data_loader(df, window_size, batch_size, option, step):
     dataset = Transformer_TimeSeriesDataset(df, window_size, option, step)
     data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
     return data_loader        
 
-
-'''
-단변량 transformer 구현
-'''
+# 단변량 transformer
 class windowDataset(Dataset):
     def __init__(self, y, input_window=80, output_window=20, stride=5):
         #총 데이터의 개수
@@ -164,6 +149,7 @@ class windowDataset(Dataset):
     def __len__(self):
         return self.len
 
+# 다변량 transformer
 class Multi_WindowDataset(Dataset):
     def __init__(self, x, input_window=80, output_window=20, stride=5):
         #총 데이터의 개수
