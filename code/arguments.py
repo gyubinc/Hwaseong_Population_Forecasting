@@ -21,7 +21,7 @@ def get_args():
     parser.add_argument('--shuffle', default=True)
     
     # 학습 옵션 정의
-    parser.add_argument('--train_path', default='./data/찐 최종 데이터.xlsx')
+    parser.add_argument('--train_path', default='./data/data.xlsx')
     parser.add_argument('--option', default = 2, type = int)
     parser.add_argument('--step', default = 12, type = int)
     parser.add_argument('--inference', default = 0, type = int)
