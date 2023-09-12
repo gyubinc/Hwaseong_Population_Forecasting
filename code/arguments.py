@@ -15,7 +15,6 @@ def get_args():
     # 모델 하이퍼 파라미터 정의
     parser.add_argument('--learning_rate', default=1e-2, type=float)
     parser.add_argument('--weight_decay', default=0, type=float)
-    parser.add_argument('--loss', default='L1', help="['L1','MSE','Huber','plcc'] 중 택1", type=str)
     parser.add_argument('--batch_size', default=4, type=int)
     parser.add_argument('--num_epochs', default=2000, type=int)
     parser.add_argument('--shuffle', default=True)
