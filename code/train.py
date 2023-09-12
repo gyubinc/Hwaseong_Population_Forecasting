@@ -1,4 +1,3 @@
-import wandb
 import numpy as np
 import torch
 import torch.nn as nn
@@ -31,7 +30,7 @@ def LSTM_train(args):
     print(f"current device: {device}")
 
     # 데이터 준비
-    df = pd.read_excel(args.train_path, index_col = '월별')
+    df = pd.read_csv(args.train_path, index_col = '월별')
     train_df, valid_df = preprocessing(df, args.window_size, args.step)
     
     # train / valid set 정의
@@ -105,7 +104,7 @@ def uni_Transformer(args):
     step = args.step
     
     # 데이터 준비
-    df = pd.read_excel(args.train_path, index_col = '월별')
+    df = pd.read_csv(args.train_path, index_col = '월별')
     data_train, data_test = preprocessing(df, iw, step)
     data_train = data_train['총인구']
     data_test = data_test['총인구']
@@ -186,7 +185,7 @@ def multi_Transformer(args):
     print(f"current device: {device}")
 
     # 데이터 준비
-    df = pd.read_excel(args.train_path, index_col = '월별')
+    df = pd.read_csv(args.train_path, index_col = '월별')
     data_train, data_test = preprocessing(df, args.window_size, args.step)
     data_train = data_train
     data_test = data_test
@@ -268,7 +267,7 @@ def CPU_multi_Transformer(args):
     print(f"current device: {device}")
 
     # 데이터 준비
-    df = pd.read_excel(args.train_path, index_col = '월별')
+    df = pd.read_csv(args.train_path, index_col = '월별', encoding = 'euc-kr')
     data_train, data_test = preprocessing(df, args.window_size, args.step)
 
     # train / valid set 정의
